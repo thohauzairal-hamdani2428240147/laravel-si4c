@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\FakultasController;
-use App\Models\Fakultas;
+use App\Http\Controllers\PeriodeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -10,4 +10,4 @@ Route::get('/', function () {
 
 Route::resource('fakultas', FakultasController::class);
 
-
+Route::resource('periode', PeriodeController::class);
