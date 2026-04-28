@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Fakultas;
+use App\Models\Berita;
 use Illuminate\Http\Request;
 
-class FakultasController extends Controller
+class BeritaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //akses model fakultas untuk mengambil semua data fakultas
-        $result = Fakultas::all(); // select * from fakultas
-        // //dd($result); // dump data hasil query ke browser
-        // kirim data fakultas ke view index
-        // return view ('fakultas.index')->with('fakultas', $result);
+        $result = Berita::all(); // select * from beritas
+        //dd($result);// dump data hasil query ke browser
+        // kirim data berita ke view index
+        // return view ('berita.index')->with('berita', $result);
         // atau compact
-        return view ('fakultas.index', compact('result'));
+        return view ('berita.index', compact('result'));
     }
 
     /**
@@ -40,7 +39,7 @@ class FakultasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Fakultas $fakultas)
+    public function show(Berita $berita)
     {
         //
     }
@@ -48,7 +47,7 @@ class FakultasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Fakultas $fakultas)
+    public function edit(Berita $berita)
     {
         //
     }
@@ -56,7 +55,7 @@ class FakultasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Fakultas $fakultas)
+    public function update(Request $request, Berita $berita)
     {
         //
     }
@@ -64,7 +63,7 @@ class FakultasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Fakultas $fakultas)
+    public function destroy(Berita $berita)
     {
         //
     }
