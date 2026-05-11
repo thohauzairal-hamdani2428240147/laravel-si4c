@@ -1,19 +1,25 @@
-<h2>Data Fakultas</h2>
-<table border="1" cellpadding="5" cellspacing="0">
-    <thead>
-        <tr>
-            <th>Nama Fakultas</th>
-            <th>Singkatan</th>
-            <th>Dekan</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($result as $item)
-            <tr>
-                <td>{{ $item->nama }}</td>
-                <td>{{ $item->singkatan }}</td>
-                <td>{{ $item->dekan }}</td>
-            </tr>
-        @endforeach
-    </tbody>
+@extends('main')
+
+@section('title', 'Fakultas')
+    
+@section('content')
+    
+<h1>data fakultas</h1>
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>No</th>
+        <th>Nama Fakultas</th>
+        <th>Singkatan</th>
+        <th>Dekan</th>
+    </tr>
+    @foreach ($result as $key => $item)
+    <tr>
+        <td>{{ $key + 1 }}</td>
+        <td>{{ $item->nama }}</td>
+        <td>{{ $item->singkatan }}</td>
+        <td>{{ $item->dekan }}</td>
+    </tr>
+    @endforeach
 </table>
+@endsection

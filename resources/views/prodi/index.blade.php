@@ -1,21 +1,28 @@
-<h2>Data Prodi</h2>
-<table border="1" cellpadding="5" cellspacing="0">
-    <thead>
-        <tr>
-            <th>Nama Prodi</th>
-            <th>Singkatan</th>
-            <th>Kaprodi</th>
-            <th>Fakultas</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($result as $item)
-            <tr>
-                <td>{{ $item->nama_prodi }}</td>
-                <td>{{ $item->singkatan }}</td>
-                <td>{{ $item->kaprodi }}</td>
-                <td>{{ $item->fakultas->nama ?? 'Tidak Ada' }}</td>
-            </tr>
-        @endforeach
-    </tbody>
+@extends('main')
+
+@section('title', 'Program Studi')
+    
+@section('content')
+<h1>Data Prodi</h1>
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>No</th>
+        <th>Nama Prodi</th>
+        <th>Singkatan</th>
+        <th>Kaprodi</th>
+        <th>Fakultas</th>
+    </tr>
+
+    @foreach($prodis as $key => $prodi)
+    <tr>
+        <td>{{ $key + 1 }}</td>
+        <td>{{ $prodi->nama_prodi }}</td>
+        <td>{{ $prodi->singkatan }}</td>
+        <td>{{ $prodi->kaprodi }}</td>
+        <td>{{ $prodi->fakultas->nama ?? '-' }}</td>
+    </tr>
+    @endforeach
+
 </table>
+@endsection
