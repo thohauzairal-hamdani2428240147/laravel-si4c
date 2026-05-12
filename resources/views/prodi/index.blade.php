@@ -3,6 +3,8 @@
 @section('title', 'Program Studi')
     
 @section('content')
+<a href="{{ route('prodi.create') }}" class="btn btn-primary mb-3">Tambah Prodi</a>
+
 <h1>Data Prodi</h1>
 
 <table class="table table-bordered table-hover">
@@ -14,13 +16,13 @@
         <th>Fakultas</th>
     </tr>
 
-    @foreach($prodis as $key => $prodi)
+    @foreach($result as $key => $item)
     <tr>
         <td>{{ $key + 1 }}</td>
-        <td>{{ $prodi->nama_prodi }}</td>
-        <td>{{ $prodi->singkatan }}</td>
-        <td>{{ $prodi->kaprodi }}</td>
-        <td>{{ $prodi->fakultas->nama ?? '-' }}</td>
+        <td>{{ $item->nama_prodi }}</td>
+        <td>{{ $item->singkatan }}</td>
+        <td>{{ $item->kaprodi }}</td>
+        <td>{{ $item->fakultas->nama ?? '-' }}</td>
     </tr>
     @endforeach
 

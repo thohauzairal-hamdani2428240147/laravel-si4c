@@ -26,7 +26,7 @@ class PeriodeController extends Controller
      */
     public function create()
     {
-        //
+        return view('periode.create');
     }
 
     /**
@@ -34,7 +34,18 @@ class PeriodeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //falidasi data
+        $input = $request->validate([
+            'tahun_akademik' => 'required',
+            'kode_smt' => 'required'
+        ]);
+
+        //simpan data ke tabel periode
+        periode::create($input);
+
+        //redirect ke halaman index periode
+        return redirect()->route('periode.index');
+
     }
 
     /**

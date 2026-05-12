@@ -1,3 +1,8 @@
+@extends('main')
+
+@section('title', 'Tambah Fakultas')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,18 +14,27 @@
 </head>
 
 <body>
-    <form action="/fakultas" method="post">
+    <form action="{{ route('fakultas.store') }}" method="post">
         @csrf
         <div class="m-3">
-            <h5>Form Pengisian Data Fakultas</h5>
             <label for="nama" class="form-label">Nama Fakultas</label>
-            <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Fakultas">
+            <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Fakultas" value="{{ old ( 'nama' ) }}" >
+            @error('nama')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
 
             <label for="singkatan" class="form-label">Singkatan Fakultas</label>
-            <input type="text" class="form-control" id="singkatan" name="singkatan" placeholder="Masukkan Singkatan Fakultas">
+            <input type="text" class="form-control" id="singkatan" name="singkatan" placeholder="Masukkan Singkatan Fakultas"value="{{ old ( 'singkatan' ) }}" >
+            @error('singkatan')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
 
             <label for="dekan" class="form-label">Nama Dekan Fakultas</label>
-            <input type="text" class="form-control" id="dekan" name="dekan" placeholder="Masukkan Nama Dekan Fakultas"  >
+            <input type="text" class="form-control" id="dekan" name="dekan" placeholder="Masukkan Nama Dekan Fakultas" value="{{ old ( 'dekan' ) }}" >
+            @error('dekan')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+
             <br>
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
@@ -30,3 +44,5 @@
 </body>
 
 </html>
+
+@endsection

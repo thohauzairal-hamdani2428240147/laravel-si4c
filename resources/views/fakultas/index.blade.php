@@ -3,6 +3,7 @@
 @section('title', 'Fakultas')
     
 @section('content')
+<a href="{{ route('fakultas.create') }}" class="btn btn-primary mb-3">Tambah Fakultas</a>
     
 <h1>data fakultas</h1>
 
