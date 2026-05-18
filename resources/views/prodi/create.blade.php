@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', 'Tambah Prodi')
+@section('title', 'Tambah Program Studi')
 
 @section('content')
 <div class="row">
@@ -32,7 +32,7 @@
                         <select class="form-select" id="fakultas_id" name="fakultas_id" required>
                             <option value="">-- Pilih Fakultas --</option>
                             @foreach($fakultas as $f)
-                                <option value="{{ $f->id }}">{{ $f->nama }}</option>
+                            <option value="{{ $f->id }}">{{old('fakultas_id') == $f->id ? 'selected' : '' }} {{ $f->nama }}</option>
                             @endforeach
                         </select>
                     </div>

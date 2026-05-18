@@ -23,6 +23,7 @@ class ProdiController extends Controller
     public function create()
     {
         $fakultas = Fakultas::all();
+        //untuk list dropdown fakultas
         return view('prodi.create', compact('fakultas'));
     }
 
@@ -32,7 +33,7 @@ class ProdiController extends Controller
     public function store(Request $request)
     {
         $val = $request->validate([
-            'nama_prodi' => 'required',
+            'nama_prodi' => 'required|unique:prodis',
             'singkatan' => 'required|max:2',
             'kaprodi' => 'required',
             'fakultas_id' => 'required|exists:fakultas,id'
