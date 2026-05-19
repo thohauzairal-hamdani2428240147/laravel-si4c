@@ -27,7 +27,7 @@
   <!--begin::Accessibility Features-->
   <!-- Skip links will be dynamically added by accessibility.js -->
   <meta name="supported-color-schemes" content="light dark" />
-  <link rel="preload" href="{{ asset('css/adminlte.css') }}" as="style" />
+  <link rel="preload" href="{{ url('css/adminlte.css') }}" as="style" />
   <!--end::Accessibility Features-->
 
   <!--begin::Fonts-->
@@ -55,7 +55,7 @@
   <!--end::Third Party Plugin(Bootstrap Icons)-->
 
   <!--begin::Required Plugin(AdminLTE)-->
-  <link rel="stylesheet" href="{{ asset('css/adminlte.css') }}" />
+  <link rel="stylesheet" href="{{ url('css/adminlte.css') }}" />
   <!--end::Required Plugin(AdminLTE)-->
 </head>
 <!--end::Head-->
@@ -221,7 +221,7 @@
           <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
               <img
-                src="{{ asset('assets/img/user2-160x160.jpg') }}"
+                src="{{ url('assets/img/user2-160x160.jpg') }}"
                 class="user-image rounded-circle shadow"
                 alt="User Image" />
               <span class="d-none d-md-inline">Alexander Pierce</span>
@@ -230,7 +230,7 @@
               <!--begin::User Image-->
               <li class="user-header text-bg-primary">
                 <img
-                  src="{{ asset('assets/img/user2-160x160.jpg') }}"
+                  src="{{ url('assets/img/user2-160x160.jpg') }}"
                   class="rounded-circle shadow"
                   alt="User Image" />
                 <p>
@@ -279,7 +279,7 @@
         <a href="../index.html" class="brand-link">
           <!--begin::Brand Image-->
           <img
-            src="{{ asset('assets/img/AdminLTELogo.png') }}"
+            src="{{ url('assets/img/AdminLTELogo.png') }}"
             alt="AdminLTE Logo"
             class="brand-image opacity-75 shadow" />
           <!--end::Brand Image-->
@@ -851,7 +851,7 @@
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"
     crossorigin="anonymous"></script>
   <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
-  <script src="{{ asset('js/adminlte.js') }}"></script>
+  <script src="{{ url('js/adminlte.js') }}"></script>
   <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
   <script>
     const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
@@ -883,6 +883,30 @@
   </script>
   <!--end::OverlayScrollbars Configure-->
   <!--end::Script-->
+  {{-- jQuery --}}
+  <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+
+  {{-- Sweet alert --}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+  <script type="text/javascript">
+      $('.show_confirm').click(function(event) {
+          var form = $(this).closest("form");
+          var nama = $(this).data("nama");
+          event.preventDefault();
+          swal({
+                  title: `Apakah Anda yakin ingin menghapus data ${nama} ini?`,
+                  text: "If you delete this, it will be gone forever.",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true,
+             })
+              .then((willDelete) => {
+                  if (willDelete) {
+                      form.submit();
+                  }
+              });
+      });
+  </script>
 </body>
 <!--end::Body-->
 

@@ -24,7 +24,7 @@
             @enderror
 
             <label for="kode_smt" class="form-label">Kode Semester</label>
-            <input type="text" class="form-control" id="kode_smt" name="kode_smt" placeholder="Masukkan Kode Semester"value="{{ old ( 'kode_smt' ) }}" >
+            <input type="text" class="form-control" id="kode_smt" name="kode_smt" placeholder="Masukkan Kode Semester 1 Atau 2 Maksimal 1 angka" value="{{ old ( 'kode_smt' ) }}" maxlength="1">
             @error('kode_smt')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
