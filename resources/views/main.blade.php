@@ -343,6 +343,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{{ url('mahasiswa') }}" class="nav-link">
+                <i class="nav-icon bi bi-people"></i>
+                <p>Mahasiswa</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{ url('periode') }}" class="nav-link">
                 <i class="nav-icon bi bi-palette"></i>
                 <p>Periode</p>
@@ -889,23 +895,23 @@
   {{-- Sweet alert --}}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
   <script type="text/javascript">
-      $('.show_confirm').click(function(event) {
-          var form = $(this).closest("form");
-          var nama = $(this).data("nama");
-          event.preventDefault();
-          swal({
-                  title: `Apakah Anda yakin ingin menghapus data ${nama} ini?`,
-                  text: "If you delete this, it will be gone forever.",
-                  icon: "warning",
-                  buttons: true,
-                  dangerMode: true,
-             })
-              .then((willDelete) => {
-                  if (willDelete) {
-                      form.submit();
-                  }
-              });
-      });
+    $('.show_confirm').click(function(event) {
+      var form = $(this).closest("form");
+      var nama = $(this).data("nama");
+      event.preventDefault();
+      swal({
+          title: `Apakah Anda yakin ingin menghapus data ${nama} ini?`,
+          text: "If you delete this, it will be gone forever.",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            form.submit();
+          }
+        });
+    });
   </script>
 </body>
 <!--end::Body-->
