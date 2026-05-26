@@ -32,8 +32,9 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'npm' => 'required|unique:mahasiswas,npm',
+        //Validasi input data
+        $input = $request->validate([
+            'npm' => 'required|unique:mahasiswas,npm', //npm harus unik di tabel mahasiswas
             'nama' => 'required',
             'tempat_lahir' => 'nullable',
             'tanggal_lahir' => 'nullable|date',
@@ -41,14 +42,21 @@ class MahasiswaController extends Controller
             'alamat' => 'nullable',
             'no_hp' => 'nullable',
             'email' => 'nullable|email|unique:mahasiswas,email',
-            'foto' => 'nullable|image',
-            'prodi_id' => 'required|exists:prodis,id',
+            'foto' => 'nullable|image|max:2048', // maksimal 2MB
+            'prodi_id' => 'required|exists:prodis,id', // pastikan prodi_id ada di tabel prodis
         ]);
+        //upload file foto jika ada
         if ($request->hasFile('foto')) {
-            $path = $request->file('foto')->store('mahasiswa_foto', 'public');
-            $validated['foto'] = $path;
+            //rename file dengan npm untuk menghindari duplikasi nama file
+            $filename = $input['npm'] . '_' . $request->file('foto')->getClientOriginalExtension();
+            // simpan file ke folder public/storage/mahasiswa_foto
+            $input['foto'] = $request->file('foto')->storeAs('mahasiswa_foto', $filename, 'public');
+        } else {
+            $input['foto'] = null; //set foto null jika tidak ada file yang diupload
         }
-        Mahasiswa::create($validated);
+        //simpan data mahasiswa ke database
+        Mahasiswa::create($input);
+        //redirect ke halaman index mahasiswa dengan pesan sukses
         return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil ditambahkan');
     }
 
@@ -74,7 +82,7 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, Mahasiswa $mahasiswa)
     {
-        $validated = $request->validate([
+        $edit = $request->validate([
             'npm' => 'required|unique:mahasiswas,npm,' . $mahasiswa->id,
             'nama' => 'required',
             'tempat_lahir' => 'nullable',
@@ -87,10 +95,14 @@ class MahasiswaController extends Controller
             'prodi_id' => 'required|exists:prodis,id',
         ]);
         if ($request->hasFile('foto')) {
-            $path = $request->file('foto')->store('mahasiswa_foto', 'public');
-            $validated['foto'] = $path;
+            //rename file dengan npm untuk menghindari duplikasi nama file
+            $filename = $edit['npm'] . '_' . $request->file('foto')->getClientOriginalExtension();
+            // simpan file ke folder public/storage/mahasiswa_foto
+            $edit['foto'] = $request->file('foto')->storeAs('mahasiswa_foto', $filename, 'public');
+        } else {
+            $edit['foto'] = null; //jika tidak ada file baru, gunakan foto lama
         }
-        $mahasiswa->update($validated);
+        $mahasiswa->update($edit);
         return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil diupdate');
     }
 
@@ -101,5 +113,10 @@ class MahasiswaController extends Controller
     {
         $mahasiswa->delete();
         return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil dihapus');
+
+        //hapus file foto jika ada
+        if ($mahasiswa->foto && file_exists(public_path('storage/' . $mahasiswa->foto))) {
+            unlink(public_path('storage/' . $mahasiswa->foto)); //hapus file foto dari folder storage
+        }
     }
 }
