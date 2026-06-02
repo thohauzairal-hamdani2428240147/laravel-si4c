@@ -6,6 +6,7 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\ProdiController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboarController;
 
 Route::get('/', function () {
     return view('fakultas.create');
@@ -20,3 +21,5 @@ Route::resource('berita', BeritaController::class);
 Route::resource('prodi', ProdiController::class);
 
 Route::resource('mahasiswa', MahasiswaController::class);
+
+Route::get('/dashboard', [DashboarController::class, 'index']);
