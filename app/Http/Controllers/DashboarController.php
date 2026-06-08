@@ -23,6 +23,6 @@ class DashboarController extends Controller
                                 FROM mahasiswas
                                 GROUP BY LEFT(npm, 2)");
 
-        return view('Dashboard', compact('grafikmhs', 'grafik_angkatan'));
+        return view('dashboard-adminlte', compact('grafikmhs', 'grafik_angkatan'));
     }
 }
